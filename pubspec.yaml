@@ -23,7 +23,11 @@ dev_dependencies:
 
 
   flutter_lints: ^1.0.0
+  
 
+rules:
+   prefer_const_constructors: false
+   prefer_const_literals_to_create_immutables: false
 
 flutter:
 
