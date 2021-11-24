@@ -90,10 +90,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _listBills() {
     return Positioned(
-        top: 331,
-        child: Column(
-          children: [
-            Container(
+      top: 331,
+      right: 0,
+      left: 0,
+      bottom: 0,
+      child: MediaQuery.removePadding(
+        removeTop: true,
+        context: context,
+        child: ListView.builder(
+          itemCount: 3,
+          itemBuilder: (_, index) {
+            return Container(
+              margin: const EdgeInsets.only(top: 6, right: 10),
               height: 130,
               width: MediaQuery.of(context).size.width - 20,
               decoration: BoxDecoration(
@@ -227,8 +235,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-            ),
-          ],
-        ));
+            );
+          },
+        ),
+      ),
+    );
   }
 }
