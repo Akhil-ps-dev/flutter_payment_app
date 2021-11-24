@@ -7,7 +7,8 @@ class LargeButtons extends StatelessWidget {
       this.backgroundColor: AppColor.mainColor,
       this.textColor,
       this.onTap,
-      this.isBoder: false, required this.text})
+      this.isBoder: false,
+      required this.text})
       : super(key: key);
   final Color? backgroundColor;
   final Color? textColor;
@@ -17,6 +18,24 @@ class LargeButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(left: 30, right: 30),
+        height: 60,
+        width: MediaQuery.of(context).size.width - 60,
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+                fontSize: 35, color: textColor, fontWeight: FontWeight.bold),
+          ),
+        ),
+        decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(width: 2, color: AppColor.mainColor)),
+      ),
+    );
   }
 }

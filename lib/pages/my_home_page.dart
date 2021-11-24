@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_payment_app/component/colors.dart';
+import 'package:flutter_payment_app/widgets/large_buttons.dart';
 import 'package:flutter_payment_app/widgets/text_size.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -23,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             _headSection(),
             _listBills(),
+            _payButton(),
           ],
         ),
       ),
@@ -74,18 +76,56 @@ class _MyHomePageState extends State<MyHomePage> {
     return Positioned(
         bottom: 5,
         right: 50,
-        child: Container(
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage("images/lines.png")),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 15,
-                    offset: Offset(0, 1),
-                    color: Color(0xFF11324d).withOpacity(0.2),
-                  ),
-                ])));
+        child: GestureDetector(
+          onTap: () {
+            showModalBottomSheet<dynamic>(
+                isScrollControlled: true,
+                barrierColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (BuildContext bc) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height - 240,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                            color: Color(0xFFeef1f4).withOpacity(0.7),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height - 310,
+                          ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 50,
+                          child: Container(
+                            width: 60,
+                            height: 250,
+                            decoration: BoxDecoration(
+                              color: AppColor.mainColor,
+                              borderRadius: BorderRadius.circular(29),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                });
+          },
+          child: Container(
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage("images/lines.png")),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 15,
+                      offset: Offset(0, 1),
+                      color: Color(0xFF11324d).withOpacity(0.2),
+                    ),
+                  ])),
+        ));
   }
 
   _listBills() {
@@ -240,5 +280,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  _payButton() {
+    return Positioned(
+        bottom: 20,
+        child: LargeButtons(
+          text: "Pay all bills",
+          textColor: Colors.white,
+        ));
   }
 }
